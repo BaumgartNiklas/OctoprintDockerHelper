@@ -72,7 +72,7 @@ def create_docker_compose(port: int, device: AnyStr, filepath: Optional[AnyStr] 
 
         filepath = os.path.join(directory, "docker_files", f"docker-compose.{device}.yml")
 
-    with open(filepath) as file:
+    with open(filepath, 'w+') as file:
         write_docker_compose(port, device, file)
 
     return filepath
