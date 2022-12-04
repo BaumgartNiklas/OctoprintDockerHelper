@@ -6,6 +6,22 @@ import controller
 
 
 def add_optional_args(parser, dest_vendor: Optional[AnyStr] = None, dest_model:  Optional[AnyStr] = None, dest_file:  Optional[AnyStr] = None, dest_docker:  Optional[AnyStr] = None):
+    """ Adds optional argument to the parses.
+    The optional arguments are for the vendor id, model id (product id), udev rule filepath, docker port.
+    The arguments are -v (--vendor), -m (--model), -f (--file) and -d (--docker) respectively
+    The added arguments are hidden from the help page.
+    If the destination for an argument is None, the corresponding argument is not added to the parser.
+
+    Args:
+        parser: parser to add the optional argument to.
+        dest_vendor: destination name for the vendor id
+        dest_model: destination name for the model id (product id)
+        dest_file: destination name for the udev rule filepath
+        dest_docker: destination name for the docker port
+
+    Returns:
+        Dictionary {arg_vendor, arg_model, arg_file, arg_docker} containing the argument objects of the created arguments.
+    """
     args = {}
     if dest_vendor:
         args['arg_vendor'] = parser.add_argument('-v', '--vendor', type=str, metavar=text.vendor_id_metavar, dest=dest_vendor, default=None, help=argparse.SUPPRESS)
@@ -19,6 +35,15 @@ def add_optional_args(parser, dest_vendor: Optional[AnyStr] = None, dest_model: 
 
 
 def show_optional_args(arg_dict: dict, arg_vendor: bool = False, arg_model: bool = False, arg_file: bool = False, arg_docker: bool = False):
+    """Function that changes the help parameter of the arguments created by add_optional_args.
+
+    Args:
+        arg_dict: dictionary as created by add_optional_args.
+        arg_vendor: Show the vendor argument in the help page
+        arg_model: Show the model argument in the help page
+        arg_file: Show the file argument in the help page
+        arg_docker: show the docker argument in the help page
+    """
     if arg_vendor and 'arg_vendor' in arg_dict:
         arg_dict['arg_vendor'].help = text.vendor_id_help
 
@@ -33,6 +58,11 @@ def show_optional_args(arg_dict: dict, arg_vendor: bool = False, arg_model: bool
 
 
 def get_args():
+    """ Creates the arguments for the command line interface
+
+    Returns:
+        Dictionary with the values of the arguments as given by the user/caller
+    """
     parser = argparse.ArgumentParser()
     # hidden optional parameters (to support them in any position even with the use of subparsers)
     add_optional_args(parser, 'vendor', 'model', 'file', 'docker')
@@ -103,6 +133,11 @@ def get_args():
 
 
 def process_args(args):
+    """Processes the arguments given by get_args and calls the corresponding functions in the controller module
+
+    Args:
+        args: args as returned by get_args
+    """
     file = args.get('file') or args.get('file2') or args.get('file3')
     if not file:
         file = '/etc/udev/rules.d/99-serial.rules'
