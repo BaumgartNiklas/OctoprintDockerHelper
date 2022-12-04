@@ -168,14 +168,15 @@ def process_args(args):
             controller.add_rule_docker(file, docker, name, vendor, model, path, serial)
         else:
             controller.add_rule(file, name, vendor, model, devpath, path, serial)
+        print('Rule added')
         sys.exit()
 
     if command == 'remove':
-        file = args.get('file') or args.get('file2')
         serial = args.get('serial number', None)
         path = args.get('path/devpath', None)
         name = args.get('name', None)
         controller.remove_rule(file, name, path, serial)
+        print('Rule removed')
         sys.exit()
 
     sys.exit()
