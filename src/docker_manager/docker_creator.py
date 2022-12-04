@@ -35,7 +35,7 @@ def create_start_command(filepath_compose: AnyStr) -> AnyStr:
     Returns:
         docker compose up command for the specified file
     """
-    return f"docker compose -f {filepath_compose} up -d"
+    return f"/usr/bin/docker compose -f {filepath_compose} up -d"
 
 
 def create_stop_command(filepath_compose: AnyStr) -> AnyStr:
@@ -47,7 +47,7 @@ def create_stop_command(filepath_compose: AnyStr) -> AnyStr:
     Returns:
         docker compose stop command for the specified file
     """
-    return f"docker compose -f {filepath_compose} stop"
+    return f"/usr/bin/docker compose -f {filepath_compose} stop"
 
 
 def create_docker_compose(port: int, device: AnyStr, filepath: Optional[AnyStr] = None) -> AnyStr:
