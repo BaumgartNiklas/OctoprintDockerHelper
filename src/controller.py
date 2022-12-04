@@ -15,7 +15,7 @@ def print_properties(device_data):
     if device_data.vendor_id:
         print(f"Vendor ID: {device_data.vendor_id}")
     if device_data.model_id:
-        print(f"Model ID (Product ID): {device_data.model_id}")
+        print(f"Model ID/Product ID: {device_data.model_id}")
     if device_data.path:
         print(f"Path ID: {device_data.path}")
     if device_data.devpath:
@@ -42,9 +42,9 @@ def print_rules(filepath: AnyStr):
 
     rules = udev_manager.get_device_rules(file_content)
 
-    for key, item in rules:
+    for key, item in rules.items():
         print(f"{key}:")
-        print(print_properties(item))
+        print_properties(item)
         print("")
 
 
