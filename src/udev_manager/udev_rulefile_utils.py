@@ -39,7 +39,7 @@ def get_names(file_content: AnyStr) -> list:
     return re.findall('SYMLINK\+="(.*?)"', file_content)
 
 
-def get_device_attribute(search_string: AnyStr, text: AnyStr, capture_group: int = 1) -> AnyStr | None:
+def get_device_attribute(search_string: AnyStr, text: AnyStr, capture_group: int = 1):
     """Searches for the specified regex expression in the text and returns the capture group.
     If no match is found, None is returned.
 

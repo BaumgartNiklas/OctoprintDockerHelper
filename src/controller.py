@@ -1,5 +1,4 @@
 import sys
-
 import udev_manager
 import docker_manager
 from typing import AnyStr, Optional
@@ -74,7 +73,7 @@ def check_for_duplicates(file_content: AnyStr, name: AnyStr, path: AnyStr, seria
     return False, ''
 
 
-def add_rule(filepath: AnyStr, name: AnyStr, vendor_id: AnyStr, model_id: AnyStr, devpath: AnyStr | None, path: AnyStr | None, serial: AnyStr | None, force=False):
+def add_rule(filepath: AnyStr, name: AnyStr, vendor_id: AnyStr, model_id: AnyStr, devpath: Optional[AnyStr], path: Optional[AnyStr], serial: Optional[AnyStr], force: bool = False):
     """Adds a rule to the udev rule file.
     Either the devpath, path or serial has to be specified.
     Checks if the given name, serial, path or devpath is already used in another rule. If another rule is found,
@@ -114,7 +113,7 @@ def add_rule(filepath: AnyStr, name: AnyStr, vendor_id: AnyStr, model_id: AnyStr
         file.write(file_content)
 
 
-def add_rule_docker(filepath: AnyStr, port: int, name: AnyStr, vendor_id: AnyStr, model_id: AnyStr, path: AnyStr | None, serial: AnyStr | None, force=False, docker_filepath: Optional[AnyStr] = None):
+def add_rule_docker(filepath: AnyStr, port: int, name: AnyStr, vendor_id: AnyStr, model_id: AnyStr, path: Optional[AnyStr], serial: Optional[AnyStr], force=False, docker_filepath: Optional[AnyStr] = None):
     """Adds a rule to the udev rule file.
     Either the path or serial has to be specified.
     Checks if the given name, serial oa path is already used in another rule. If another rule is found,
@@ -156,7 +155,7 @@ def add_rule_docker(filepath: AnyStr, port: int, name: AnyStr, vendor_id: AnyStr
         file.write(file_content)
 
 
-def remove_rule(filepath: AnyStr, name: AnyStr | None, path: AnyStr | None, serial: AnyStr | None):
+def remove_rule(filepath: AnyStr, name: Optional[AnyStr], path: Optional[AnyStr], serial: Optional[AnyStr]):
     """Removes a rule from an udev rule file.
     Only one of the optional parameters has to be specified for the corresponding rules to be removed.
 
