@@ -20,7 +20,7 @@ For further details regarding Octoprint visit their [Website](https://octoprint.
 To use the command line interface, execute the 'octodocker.py' in the extracted folder.\
 `python3 octodocker.py`\
 The script provides a help page to get you started.\
-The available options are:\
+The available options are:
 * devices: Shows all currently connected devices and their attributes
 * rules: Shows all your current udev rules
 * add: adds a new rule
